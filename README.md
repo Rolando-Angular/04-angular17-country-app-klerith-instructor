@@ -1,4 +1,5 @@
 # CountryApp
 
 ### Technologies
-### Routers + RouterModule + router-outlet + routerLink
+### Routers + RouterModule (forRoot + forChildren) + router-outlet + routerLink
+### loadChildren

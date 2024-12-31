@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CountriesService } from '../../services/countries.service';
 
 @Component({
   selector: 'countries-by-capital-page',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styles: ``
 })
 export class ByCapitalPageComponent {
+
+  constructor(
+    private countriesService: CountriesService,
+  ) { }
 
   public searchByCapital(term: string): void {
     console.log('Desde ByCapitalPage');

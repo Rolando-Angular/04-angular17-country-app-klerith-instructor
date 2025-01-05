@@ -1,5 +1,17 @@
 # CountryApp
 
 ### Technologies
-### Routers + RouterModule (forRoot + forChildren) + router-outlet + routerLink + loadChildren
+### ngOnInit
+### Routers + RouterModule (forRoot + forChildren) + 
+### router-outlet + routerLink + loadChildren
+### Router (navigateByUrl)
+### ActivateRoute
 ### @Input + @Output
+### HttpClient + HttpClientModule
+
+
+### PIPE
+* map
+* switchMap
+* catchError
+

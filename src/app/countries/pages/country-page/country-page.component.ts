@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CountriesService } from '../../services/countries.service';
 import { switchMap } from 'rxjs';
+import { Country } from '../../interfaces/country';
 
 @Component({
   selector: 'countries-country-page',
@@ -17,6 +18,9 @@ export class CountryPageComponent implements OnInit {
     switchMap -> It takes an input observable and transform  each emitted
     value into a new inner observable.
   */
+
+  public country?: Country | null;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -33,6 +37,7 @@ export class CountryPageComponent implements OnInit {
         if (!country) {
           this.router.navigateByUrl('');
         }
+        this.country = country;
       });
   }
 

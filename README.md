@@ -14,4 +14,5 @@
 * map
 * switchMap
 * catchError
+* delay
 

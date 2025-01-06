@@ -10,7 +10,9 @@
   <div class="col">
     <!-- tabla de resultados -->
     <hr>
-    <shared-loading-spinner></shared-loading-spinner>
-    <countries-country-table [countries]="countries"></countries-country-table>
+    <shared-loading-spinner *ngIf="isLoading; else tabla"></shared-loading-spinner>
+    <ng-template #tabla>
+      <countries-country-table [countries]="countries"></countries-country-table>
+    </ng-template>
   </div>
 </div>

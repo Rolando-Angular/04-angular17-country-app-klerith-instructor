@@ -1,13 +1,14 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { debounceTime, Subject } from 'rxjs';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { debounceTime, Subject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'shared-search-box',
   templateUrl: './search-box.component.html',
   styles: ``
 })
-export class SearchBoxComponent implements OnInit {
+export class SearchBoxComponent implements OnInit, OnDestroy {
   private debouncer: Subject<string> = new Subject<string>();
+  private debouncerSuscription?: Subscription;
 
   /*
     debounceTime -> Emits a notification from the source Observable only after a particular time span has passed without another source emission.
@@ -27,13 +28,17 @@ export class SearchBoxComponent implements OnInit {
 
 
   public ngOnInit(): void {
-    this.debouncer
+    this.debouncerSuscription = this.debouncer
       .pipe(
-        debounceTime(700),
+        debounceTime(1000),
       )
       .subscribe(value => {
         this.onDebounce.emit(value);
       });
+  }
+
+  public ngOnDestroy(): void {
+    this.debouncerSuscription?.unsubscribe();
   }
 
   public emitValue(tagValue: string): void {

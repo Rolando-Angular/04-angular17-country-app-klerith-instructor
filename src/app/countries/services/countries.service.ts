@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, delay, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { Country } from '../interfaces/country';
 
 @Injectable({
@@ -14,6 +14,7 @@ export class CountriesService {
     catchError -> It's used to handle errors in the observable stream created
     of -> It creates an observable
     map -> It's used to trasnform the data emitted by an observable.
+    delay -> Delays the emission of items from the source Observable by a given timeout or until a given Date.
    */
 
   constructor(
@@ -48,7 +49,7 @@ export class CountriesService {
     return this.http.get<Country[]>(url)
       .pipe(
         catchError((error) => of([])),
-        delay(2000),
+        // delay(2000),
       );
   }
 

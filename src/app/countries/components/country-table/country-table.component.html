@@ -29,7 +29,7 @@
           {{ country.name.common }}
         </td>
         <td>
-          {{ country.capital[0] }}
+          {{ country.capital?.length ? country.capital![0] : '' }}
         </td>
         <td>
           {{ country.population | number }}

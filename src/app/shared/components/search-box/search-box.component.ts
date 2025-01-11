@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { debounceTime, Subject, Subscription } from 'rxjs';
 
 @Component({
@@ -11,17 +11,15 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
   private debouncerSuscription?: Subscription;
 
   /*
+    ngOnDestroy -> It's called just before a component or directive is destroyed by Angular
     debounceTime -> Emits a notification from the source Observable only after a particular time span has passed without another source emission.
   */
-
-  @ViewChild('txtInput')
-  private tagInput!: ElementRef<HTMLInputElement>;
 
   @Input()
   public placeholder: string = '';
 
-  @Output()
-  public onValue: EventEmitter<string> = new EventEmitter<string>();
+  @Input()
+  public initialValue: string = '';
 
   @Output()
   public onDebounce: EventEmitter<string> = new EventEmitter<string>();
@@ -41,13 +39,9 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
     this.debouncerSuscription?.unsubscribe();
   }
 
-  public emitValue(tagValue: string): void {
-    this.onValue.emit(tagValue)
-    this.tagInput.nativeElement.value = '';
-  }
-
   public onKeyPress(searchTerm: string) {
     this.debouncer.next(searchTerm);
+    console.log('onKyePress has been done')
   }
 
 }

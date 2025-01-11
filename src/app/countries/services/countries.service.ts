@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
-import { Country } from '../interfaces/country';
+import { CacheStore } from '../interfaces/cache-store.interface';
+import { catchError, map, Observable, of, tap } from 'rxjs';
+import { Country } from '../interfaces/country.interface';
+import { Region } from '../interfaces/region.type';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +11,11 @@ import { Country } from '../interfaces/country';
 export class CountriesService {
 
   private apiUrl: string = 'https://restcountries.com/v3.1';
+  public cacheStore: CacheStore = {
+    byCapital: { term: '', countries: [] },
+    byCountries: { term: '', countries: [] },
+    byRegion: { region: '', countries: [] },
+  }
 
   /*
     catchError -> It's used to handle errors in the observable stream created
@@ -32,17 +39,26 @@ export class CountriesService {
 
   public searchCapital(capital: string): Observable<Country[]> {
     const url = `${this.apiUrl}/capital/${capital}`
-    return this.getCountriesRequest(url);
+    return this.getCountriesRequest(url)
+      .pipe(
+        tap(countries => this.cacheStore.byCapital = { term: capital, countries: [...countries] }),
+      );
   }
 
   public searhCountry(country: string): Observable<Country[]> {
     const url = `${this.apiUrl}/name/${country}`;
-    return this.getCountriesRequest(url);
+    return this.getCountriesRequest(url)
+      .pipe(
+        tap(countries => this.cacheStore.byCountries = { term: country, countries: [...countries] }),
+      );
   }
 
-  public searchRegion(region: string): Observable<Country[]> {
+  public searchRegion(region: Region): Observable<Country[]> {
     const url = `${this.apiUrl}/region/${region}`;
-    return this.getCountriesRequest(url);
+    return this.getCountriesRequest(url)
+      .pipe(
+        tap(countries => this.cacheStore.byRegion = { region: region, countries: [...countries] }),
+      );
   }
 
   private getCountriesRequest(url: string): Observable<Country[]> {

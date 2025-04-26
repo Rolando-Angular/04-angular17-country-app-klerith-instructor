@@ -1,14 +1,13 @@
 # CountryApp
 
-### Technologies
-### ngOnInit
-### Routers + RouterModule (forRoot + forChildren) + 
-### router-outlet + routerLink + loadChildren
-### Router (navigateByUrl)
-### ActivateRoute
-### @Input + @Output
-### HttpClient + HttpClientModule
-
+### CONCEPTS
+* ngOnInit
+* Routers + RouterModule (forRoot + forChildren) + 
+* router-outlet + routerLink + loadChildren
+* Router (navigateByUrl)
+* ActivateRoute
+* @Input + @Output
+* HttpClient + HttpClientModule
 
 ### PIPE
 * map
@@ -17,5 +16,11 @@
 * delay
 * debounceTime
 
-# My Page deployed thanks to GitHub Pages:
-https://rolando-angular.github.io/angular-country-app-klerith-instructor/
+### START UP APPLICATION
+```
+npm install
+ng serve
+```
+
+### DEPLOYED ON GITHUB PAGES
+https://rolando-angular.github.io/04-angular17-country-app-klerith-instructor/
